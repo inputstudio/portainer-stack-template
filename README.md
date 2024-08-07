@@ -24,13 +24,15 @@ cd your-project-folder
 degit github:inputstudio/portainer-stack-template
 ```
 
-3. Create your `Dockerfile` and `compose.yml` or use [docker init](https://docs.docker.com/reference/cli/docker/init/):
+3. Edit `.github/workflows/deploy.yml` replacing `ghcr.io/inputstudio/hello-world` with your image name.
+
+4. Create your `Dockerfile` and `compose.yml` or use [docker init](https://docs.docker.com/reference/cli/docker/init/):
 
 ```bash
 docker init
 ```
 
-4. Add `stack.env` to your `compose.yml`:
+5. (optional) If you want to use environment variables in your stack, add the following to your `compose.yml`:
 
 ```yaml
 services:
@@ -39,9 +41,7 @@ services:
       - stack.env # This file contains all the environment variables set in the stack editor
 ```
 
-5. Add a stack on Portainer. Learn how to do it [here](https://docs.portainer.io/user/docker/stacks/add).
-6. Enable the webhook on the stack. Learn how to do it [here](https://docs.portainer.io/user/docker/stacks/webhooks).
-7. Add the webhook URL to your GitHub repo secrets as `PORTAINER_STACK_WEBHOOK`.
-8. Enjoy!
-
-A Docker image build will be triggered every time you push to the `main` branch. The image will be tagged with the commit hash and pushed to `ghcr.io` (you can change that). The stack will be updated automatically via webhook.
+6. Add a stack on Portainer. Learn how to do it [here](https://docs.portainer.io/user/docker/stacks/add).
+7. Enable the webhook on the stack. Learn how to do it [here](https://docs.portainer.io/user/docker/stacks/webhooks).
+8. Add the webhook URL to your GitHub repo secrets as `PORTAINER_STACK_WEBHOOK`.
+9. Done 🎉

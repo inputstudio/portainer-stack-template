@@ -1,7 +1,7 @@
 name: Deploy
 
 on:
-  workflow_dispatch: # This allows you to manually trigger the workflow from the Actions tab
+  workflow_dispatch:
   push:
 
 jobs:
@@ -23,7 +23,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/inputstudio/hello-world # TODO: Change this to your own image
+          # TODO: Set your image name
+          images: ghcr.io/inputstudio/hello-world
           tags: |
             type=sha
             type=raw,value=latest
@@ -43,7 +44,8 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' # Only deploy on push to main branch
+    # Only deploy on push to main branch. Remove the following line if you want to deploy on every push.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Trigger Portainer stack webhook
         run: |
