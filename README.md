@@ -11,28 +11,23 @@ This is a template for deploying Portainer stacks with GitHub Actions.
 
 ## Usage
 
-1. Install [degit](https://www.npmjs.com/package/degit):
+1. Download the `deploy.yml` and move it to the `.github/workflows` folder:
 
 ```bash
-npm install -g degit
+curl -LJO https://raw.githubusercontent.com/inputstudio/portainer-stack-template/main/.github/workflows/deploy.yml
 ```
 
-2. Clone this template to your project folder:
+If you don't have `curl` installed, you can open the link above and copy the content to a new file named `deploy.yml` in the `.github/workflows` folder.
 
-```bash
-cd your-project-folder
-degit github:inputstudio/portainer-stack-template
-```
+2. Edit `deploy.yml` replacing `ghcr.io/inputstudio/hello-world` with your image name.
 
-3. Edit `.github/workflows/deploy.yml` replacing `ghcr.io/inputstudio/hello-world` with your image name.
-
-4. Create your `Dockerfile` and `compose.yml` or use [docker init](https://docs.docker.com/reference/cli/docker/init/):
+3. Create your `Dockerfile` and `compose.yml` or use [docker init](https://docs.docker.com/reference/cli/docker/init/):
 
 ```bash
 docker init
 ```
 
-5. (optional) If you want to use environment variables in your stack, add the following to your `compose.yml`:
+4. (optional) If you want to use environment variables in your stack, add the following to your `compose.yml`:
 
 ```yaml
 services:
@@ -41,7 +36,6 @@ services:
       - stack.env # This file contains all the environment variables set in the stack editor
 ```
 
-6. Add a stack on Portainer. Learn how to do it [here](https://docs.portainer.io/user/docker/stacks/add).
-7. Enable the webhook on the stack. Learn how to do it [here](https://docs.portainer.io/user/docker/stacks/webhooks).
-8. Add the webhook URL to your GitHub repo secrets as `PORTAINER_STACK_WEBHOOK`.
-9. Done 🎉
+5. [Add a stack on Portainer](https://docs.portainer.io/user/docker/stacks/add) and [enable GitOps webhook](https://docs.portainer.io/user/docker/stacks/webhooks).
+6. Add the webhook URL to your GitHub repo secrets as `PORTAINER_STACK_WEBHOOK`.
+7. Done 🎉
